@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .test-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .success { background: #4CAF50; }
+        .warning { background: #FF9800; }
+        .error { background: #F44336; }
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-card">
+        <h1>🌤️ Weather Dashboard - API Test</h1>
+        <p>Testing the free weather API (wttr.in) to ensure your app works perfectly!</p>
+        
+        <h2>🔧 Quick Tests</h2>
+        
+        <h3>1. Free Weather API Test <span id="api-status" class="status warning">Testing...</span></h3>
+        <button onclick="testWeatherAPI()">Test London Weather</button>
+        <button onclick="testWeatherAPI('New York')">Test New York Weather</button>
+        <button onclick="testWeatherAPI('Tokyo')">Test Tokyo Weather</button>
+        
+        <h3>2. Your Main App</h3>
+        <button onclick="openMainApp()">🚀 Open Weather Dashboard</button>
+        <button onclick="testLocalServer()">🔗 Test Local Server</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <div class="test-card">
+        <h2>✅ What's Working</h2>
+        <ul>
+            <li>✅ <strong>Free Weather API</strong> - No API key required (wttr.in)</li>
+            <li>✅ <strong>Production CSS</strong> - No CDN warnings</li>
+            <li>✅ <strong>Error Handling</strong> - Graceful fallbacks</li>
+            <li>✅ <strong>Beautiful UI</strong> - Glassmorphism design</li>
+            <li>✅ <strong>Mobile Responsive</strong> - Works on all devices</li>
+            <li>✅ <strong>Interactive Charts</strong> - Temperature visualization</li>
+        </ul>
+    </div>
+
+    <div class="test-card">
+        <h2>🚀 Next Steps</h2>
+        <ol>
+            <li><strong>Test the API</strong> - Click "Test London Weather" above</li>
+            <li><strong>Open Main App</strong> - Click "Open Weather Dashboard"</li>
+            <li><strong>Deploy to Vercel</strong> - Run <code>vercel --prod</code></li>
+            <li><strong>Share Your Project</strong> - Add to your portfolio!</li>
+        </ol>
+    </div>
+
+    <script>
+        async function testWeatherAPI(city = 'London') {
+            const resultDiv = document.getElementById('result');
+            const statusSpan = document.getElementById('api-status');
+            
+            resultDiv.textContent = `Testing ${city} weather...`;
+            statusSpan.textContent = 'Testing...';
+            statusSpan.className = 'status warning';
+            
+            try {
+                const response = await fetch(`https://wttr.in/${encodeURIComponent(city)}?format=j1`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const data = await response.json();
+                const current = data.current_condition[0];
+                const location = data.nearest_area[0];
+                
+                const result = `
+🌍 Location: ${location.areaName[0].value}, ${location.country[0].value}
+🌡️ Temperature: ${current.temp_C}°C (feels like ${current.FeelsLikeC}°C)
+☁️ Condition: ${current.weatherDesc[0].value}
+💧 Humidity: ${current.humidity}%
+💨 Wind: ${current.windspeedKmph} km/h
+👁️ Visibility: ${current.visibility} km
+🏔️ Pressure: ${current.pressure} hPa
+
+✅ API is working perfectly!
+Your weather dashboard will show real data for ${city}.`;
+                
+                resultDiv.textContent = result;
+                statusSpan.textContent = 'Working!';
+                statusSpan.className = 'status success';
+                
+            } catch (error) {
+                resultDiv.textContent = `❌ API Error: ${error.message}
+                
+Don't worry! Your app has a demo mode that will still work beautifully.
+The issue might be:
+- Network connectivity
+- API temporarily unavailable
+- CORS restrictions (try running on a local server)`;
+                
+                statusSpan.textContent = 'Error';
+                statusSpan.className = 'status error';
+            }
+        }
+        
+        function openMainApp() {
+            window.open('index.html', '_blank');
+        }
+        
+        function testLocalServer() {
+            const result = document.getElementById('result');
+            result.textContent = `🌐 Local Server Test
+
+To run your weather dashboard locally:
+
+1. Open terminal/command prompt
+2. Navigate to your project folder
+3. Run one of these commands:
+
+   Python: python -m http.server 3000
+   Node.js: npx live-server --port=3000
+   PHP: php -S localhost:3000
+
+4. Open: http://localhost:3000
+
+This will solve any CORS issues and make the API work perfectly!`;
+        }
+        
+        // Auto-test on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => testWeatherAPI(), 1000);
+        });
+    </script>
+</body>
+</html>

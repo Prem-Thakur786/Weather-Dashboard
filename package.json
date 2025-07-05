@@ -1,0 +1,41 @@
+{
+  "name": "weather-dashboard",
+  "version": "1.0.0",
+  "description": "Interactive weather application with real-time data, beautiful UI, and location-based forecasts using OpenWeather API",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=3000",
+    "build": "echo 'Build complete'",
+    "test": "echo 'No tests specified'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "weather",
+    "dashboard",
+    "javascript",
+    "api",
+    "tailwindcss",
+    "chartjs",
+    "responsive",
+    "forecast"
+  ],
+  "author": "Prem Thakur",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/weather-dashboard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/weather-dashboard/issues"
+  },
+  "homepage": "https://github.com/yourusername/weather-dashboard#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "type": "commonjs"
+}
