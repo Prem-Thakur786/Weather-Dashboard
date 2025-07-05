@@ -3,11 +3,15 @@
   "name": "weather-dashboard",
   "builds": [
     {
-      "src": "index.html",
+      "src": "**",
       "use": "@vercel/static"
     }
   ],
   "rewrites": [
+    {
+      "source": "/(.+\\.[a-z]+)$",
+      "destination": "/$1"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
