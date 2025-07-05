@@ -21,7 +21,7 @@ A beautiful, interactive weather application with real-time data, stunning UI/UX
 
 ## 🚀 Live Demo
 
-[**View Live Demo**](https://your-weather-dashboard.vercel.app)
+[**View Live Demo**](https://weather-dashboard-o7yn.vercel.app/)
 
 ## 🛠️ Technologies Used
 
@@ -196,8 +196,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Prem Thakur**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+- GitHub: [Prem Thakur](https://github.com/Prem-Thakur786)
+- LinkedIn: [Prem Chand](https://www.linkedin.com/in/prem-chand-411aab211/)
 
 ## 🙏 Acknowledgments
 
